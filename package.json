@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@cosmjs/encoding": "^0.32.2",
+    "@cosmjs/proto-signing": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2",
+    "@sei-js/core": "^3.1.2",
+    "@sei-js/proto": "^3.1.0",
+    "cosmos-lib": "^1.1.0",
+    "js-base64": "^3.7.5"
+  },
+  "scripts": {
+    "start": "node main.js"
+  },
+  "type": "module"
+}
