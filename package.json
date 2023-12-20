@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@cosmjs/encoding": "^0.32.2",
+    "@cosmjs/proto-signing": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2",
+    "js-base64": "^3.7.5"
+  }
+}
