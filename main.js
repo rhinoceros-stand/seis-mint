@@ -1,24 +1,32 @@
 import {
-    calculateFee, SigningStargateClient, GasPrice, coins
+    calculateFee,
+    SigningStargateClient,
+    GasPrice,
+    coins
 } from "@cosmjs/stargate"
-import {DirectSecp256k1Wallet} from '@cosmjs/proto-signing'
+import {crypto} from "cosmos-lib"
+import {
+    DirectSecp256k1Wallet,
+} from '@cosmjs/proto-signing'
 import {fromHex} from "@cosmjs/encoding"
 import {encode} from 'js-base64'
 
-const RPC_URL = 'https://sei-rpc.brocha.in'
+const RPC_URL = 'https://shentu-rpc.publicnode.com'
 const PRIVATE_KEY = ''
+const MNEMONIC = ''
 
 async function send() {
     try {
-        const wallet = await DirectSecp256k1Wallet.fromKey(fromHex(PRIVATE_KEY.substring(2)), 'sei');
-        const gasPrice = GasPrice.fromString('1usei')
+        const keys = crypto.getKeysFromMnemonic(MNEMONIC);
+        const wallet = await DirectSecp256k1Wallet.fromKey(Buffer.from(keys.privateKey), 'shentu');
+        const gasPrice = GasPrice.fromString('1uctk')
         const client = await SigningStargateClient.connectWithSigner(RPC_URL, wallet, {
             gasPrice
         })
 
         const amount = coins(1, gasPrice.denom)
-        const fee = calculateFee(100000, GasPrice.fromString('0.1usei'));
-        const memo = 'data:,{"p":"sei-20","op":"mint","tick":"seis","amt":"1000"}'
+        const fee = calculateFee(70000, GasPrice.fromString('0.04uctk'));
+        const memo = 'data:,{"op":"mint","amt":"10000","tick":"openbounty","p":"src-20"}'
         const encodedMemo = encode(memo)
 
         const [account] = await wallet.getAccounts()
